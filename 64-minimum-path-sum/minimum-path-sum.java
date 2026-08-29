@@ -1,22 +1,19 @@
 class Solution {
+    public int minpath(int ind1, int ind2, int[][] dp, int[][] grid){
+        if(ind1==0 && ind2==0) return grid[0][0];
+        if(ind1<0 || ind2<0) return (int) 1e9;
+        if(dp[ind1][ind2]!=-1) return dp[ind1][ind2];
+        int left=grid[ind1][ind2]+minpath(ind1, ind2-1, dp, grid);
+        int up=grid[ind1][ind2]+minpath(ind1-1, ind2, dp, grid);
+        return dp[ind1][ind2]=Math.min(left, up);
+    }
     public int minPathSum(int[][] grid) {
         int n=grid.length;
         int m=grid[0].length;
         int[][] dp=new int[n][m];
-       for(int i=0; i<n; i++){
-        for(int j=0; j<m; j++){
-            if(i==0 && j==0) dp[i][j]=grid[i][j];
-            else{
-                 int up=grid[i][j];
-                 if(i>0) up+=dp[i-1][j];
-                 else up+=(int) 1e9;
-                 int left=grid[i][j];
-                 if(j>0) left+=dp[i][j-1];
-                 else left=(int) 1e9;
-                 dp[i][j]=Math.min(up, left);
-            }
+        for(int[] row: dp){
+            Arrays.fill(row, -1);
         }
-       }
-       return dp[n-1][m-1];
+        return minpath(n-1, m-1,dp, grid);
     }
 }
