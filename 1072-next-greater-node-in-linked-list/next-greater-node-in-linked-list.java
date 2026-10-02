@@ -18,13 +18,17 @@ class Solution {
         }
         int n=arr.size();
         int[] ans=new int[n];
-        for(int i=0; i<n; i++){
-            for(int j=i+1; j<n; j++){
-                if(arr.get(i)<arr.get(j)){
-                    ans[i]=arr.get(j);
-                    break;
-                }
+        Stack<Integer> st=new Stack<>();
+        for(int i=n-1; i>=0; i--){
+            while (!st.isEmpty() && st.peek() <= arr.get(i)) {
+                st.pop();
             }
+
+            if (!st.isEmpty()) {
+                ans[i] = st.peek();
+            }
+
+            st.push(arr.get(i));
         }
         return ans;
     }
