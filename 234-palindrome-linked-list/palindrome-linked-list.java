@@ -18,17 +18,19 @@ class Solution {
         fast=fast.next.next;
        }
        ListNode prev=null;
-       while(slow!=null){
-        ListNode next=slow.next;
-        slow.next=prev;
-        prev=slow;
-        slow=next;
+       ListNode curr=slow;
+       while(curr!=null){
+        ListNode front=curr.next;
+        curr.next=prev;
+        prev=curr;
+        curr=front;
        }
        while(prev!=null){
-        if(head.val!=prev.val) return false;
+        if(prev.val!=head.val) return false;
         prev=prev.next;
         head=head.next;
        }
        return true;
+       
     }
 }
