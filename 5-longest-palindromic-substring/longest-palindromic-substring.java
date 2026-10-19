@@ -1,5 +1,5 @@
 class Solution {
-    public boolean isPalindrome(String s, int i, int j){
+    public boolean ispalindrome(String s, int i, int j){
         int n=s.length();
         while(i<j){
             if(s.charAt(i)!=s.charAt(j)){
@@ -15,14 +15,13 @@ class Solution {
         String ans="";
         for(int i=0; i<n; i++){
             for(int j=0; j<n; j++){
-                if(isPalindrome(s, i, j)==true){
+                if(ispalindrome(s, i, j)==true){
                     if(j-i+1>ans.length()){
-                        ans=s.substring(i, j+1);
+                         ans=s.substring(i, j+1);
                     }
                 }
             }
         }
         return ans;
-        
     }
 }
