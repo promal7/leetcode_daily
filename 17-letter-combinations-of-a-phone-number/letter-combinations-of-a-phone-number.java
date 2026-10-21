@@ -1,0 +1,37 @@
+import java.util.*;
+
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        List<String> ans = new ArrayList<>();
+
+        if (digits.length() == 0) {
+            return ans;
+        }
+
+        String[] map = {
+            "", "", "abc", "def", "ghi",
+            "jkl", "mno", "pqrs", "tuv", "wxyz"
+        };
+
+        solve(digits, 0, "", map, ans);
+
+        return ans;
+    }
+
+    public void solve(String digits, int index, String curr,
+                      String[] map, List<String> ans) {
+
+        if (index == digits.length()) {
+            ans.add(curr);
+            return;
+        }
+
+        int digit = digits.charAt(index) - '0';
+        String letters = map[digit];
+
+        for (int i = 0; i < letters.length(); i++) {
+            solve(digits, index + 1,
+                  curr + letters.charAt(i), map, ans);
+        }
+    }
+}
